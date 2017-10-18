@@ -74,6 +74,49 @@ public class Colosseum {
      */
     public static Pokemon buildPokemon() {
         Pokemon tempPokemon = new Pokemon();
+
+        //get name of pokemon
+        System.out.print("Please name your Pokemon: ");
+        tempPokemon.name = myScan.next();
+
+        //set hitpoints of pokemon
+        int hitpoints = 0;
+        while (!(hitpoints >= 1 && hitpoints <= MAX_HIT_POINTS)) {
+            System.out.print("How many hitpoints will it have? (1-50) ");
+            hitpoints = myScan.nextInt();
+            if (!(hitpoints >= 1 && hitpoints <= MAX_HIT_POINTS)) {
+                System.out.println("Sorry. Hit points must be between 1 and 50");
+            }
+        }
+        tempPokemon.hitPoints = hitpoints;
+
+        //set initialize attack and defense level
+        int attacklevel = 0;
+        int defenselevel = 0;
+
+        //tell user what to do
+        System.out.println("Split fifty points between attack level and defense level.");
+
+        //set attack level
+        while (!(attacklevel >= 1 && attacklevel <= 49)) {
+            System.out.print("Enter your attack level (1-49): ");
+            attacklevel = myScan.nextInt();
+            if (!(attacklevel >= 1 && attacklevel <= 49)) {
+                System.out.println("Sorry. The attack level must be between 1 and 49.");
+            }
+        }
+
+        //set defense level
+        int defenseBound = 50 - attacklevel;
+        while (!(defenselevel <= defenseBound && defenselevel >= 1)) {
+            System.out.print("Enter your defense level (1-" + defenseBound + "): ");
+            defenselevel = myScan.nextInt();
+            if (!(defenselevel <= defenseBound && defenselevel >= 1)) {
+                System.out.println("Sorry. The defense level must be brtween 1 and " + defenseBound + ".");
+            }
+        }
+
+        //return the created Pokemon
         return tempPokemon;
     }
 
@@ -91,7 +134,19 @@ public class Colosseum {
      * Implement this function.
      */
     public static void printWhoIsAhead() {
-        System.out.println("Implement me!");
+        Pokemon first = firstPokemon;
+        Pokemon second = secondPokemon;
+        System.out.println(first.name + "has " + first.hitPoints + " hit points");
+        System.out.println(second.name + "has " + second.hitPoints + " hit points");
+        if (first.hitPoints == second.hitPoints) {
+            System.out.println("They're neck and neck!");
+        }
+        if (first.hitPoints > second.hitPoints) {
+            System.out.println(first.name + "is currently ahead!");
+        }
+        if (second.hitPoints > first.hitPoints) {
+            System.out.println(second.name + "is currently ahead!");
+        }
     }
 
     /**
